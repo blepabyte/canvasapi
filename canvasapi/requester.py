@@ -217,11 +217,12 @@ class Requester(object):
         )
 
         try:
-            logger.debug(
-                "Data: {data}".format(data=pformat(response.content.decode("utf-8")))
-            )
+            response_text = response.content.decode("utf-8")
+            logger.debug("Data:")
+            logger.debug(response_text)
         except UnicodeDecodeError:
-            logger.debug("Data: {data}".format(data=pformat(response.content)))
+            logger.debug("Binary data:")
+            logger.debug(response.content)
         except AttributeError:
             # response.content is None
             logger.debug("No data")
